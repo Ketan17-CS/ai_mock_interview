@@ -1,22 +1,24 @@
 import dayjs from "dayjs";
 import Image from "next/image";
 
-import {Button} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 import { cn, getRandomInterviewCover } from "@/lib/utils";
+import { getFeedbackByInterviewId } from "@/lib/actions/general.action";
 import DisplayTechIcons from "@/components/DisplayTechicons";
 
+
 const InterviewCard = async ({
-        interviewId, userId, role, type, techstack, createdAt,
-    }: InterviewCardProps) => {
+    interviewId, userId, role, type, techstack, createdAt,
+}: InterviewCardProps) => {
     const feedback = null as Feedback | null;
-        // userId && interviewId
-        //     ? await getFeedbackByInterviewId({
-        //         interviewId,
-        //         userId,
-        //     })
-        //     : null;
+    userId && interviewId
+        ? await getFeedbackByInterviewId({
+            interviewId,
+            userId,
+        })
+        : null;
 
     const normalizedType = /mix/gi.test(type) ? "Mixed" : type;
 
@@ -76,7 +78,7 @@ const InterviewCard = async ({
                     </p>
                 </div>
 
-                <div className="flex flex-row justify-between">
+                {/* <div className="flex flex-row justify-between">
                     <DisplayTechIcons techStack={techstack} />
 
                     <Button className="btn-primary">
@@ -90,7 +92,7 @@ const InterviewCard = async ({
                             {feedback ? "Check Feedback" : "View Interview"}
                         </Link>
                     </Button>
-                </div>
+                </div> */}
             </div>
         </div>
     );
